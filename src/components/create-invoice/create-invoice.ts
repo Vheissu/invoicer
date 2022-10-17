@@ -1,7 +1,7 @@
 import { IRouteableComponent } from '@aurelia/router';
 import { IDataService } from '../../data-service';
 
-export class CreateInvoiceComponent implements IRouteableComponent {
+export class CreateInvoice implements IRouteableComponent {
     private invoice = {
         clientName: '',
         paymentStatus: 'pending',

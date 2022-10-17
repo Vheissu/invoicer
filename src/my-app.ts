@@ -6,37 +6,37 @@ export class MyApp implements IRouteableComponent {
     {
       path: '',
       title: 'Home',
-      component: () => import('./components/home'),
+      component: () => import('./components/home/home-page'),
     },
     {
-      path: 'invoice/:invoidId',
+      path: 'invoice/:invoiceId',
       title: 'Invoice',
-      component: () => import('./components/invoice'),
+      component: () => import('./components/invoice/invoice-page'),
     },
     {
       path: 'invoices',
       title: 'Invoices',
-      component: () => import('./components/invoices'),
+      component: () => import('./components/invoices/invoices-page'),
     },
     {
       path: 'create-invoice',
       title: 'Create Invoice',
-      component: () => import('./components/create-invoice'),
+      component: () => import('./components/create-invoice/create-invoice'),
     },
     {
       path: 'contacts',
       title: 'Contacts',
-      component: () => import('./components/contacts'),
+      component: () => import('./components/contacts/contacts-page'),
     },
     {
       path: 'settings',
       title: 'Settings',
-      component: () => import('./components/settings'),
+      component: () => import('./components/settings/settings-page'),
     },
     {
       path: '*',
       title: 'Not found',
-      component: () => import('./components/not-found'),
+      component: () => import('./components/not-found/not-found'),
     }
   ];
 
