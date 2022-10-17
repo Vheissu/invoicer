@@ -1,45 +1,26 @@
-<div>
-    <a href="/" class="block p-3" data-bs-toggle="tooltip" data-bs-placement="right">
-      <svg class="bi pe-none" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="visually-hidden">Icon-only</span>
-    </a>
-    <ul class="nav nav-pills nav-flush flex-col mb-auto text-center">
-      <li class="nav-item">
-        <a load="home" class="nav-link py-3" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link scroll-py-3" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link py-3" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"></use></svg>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link py-3" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link py-3" data-bs-toggle="tooltip" data-bs-placement="right">
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg>
-        </a>
-      </li>
+<h1 class="logo text-2xl font-bold mb-5">Invoicer</h1>
+
+<nav class="menu">
+    <ul class="flex flex-col gap-2">
+        <li><a load="/">Home</a></li>
+        <li>
+            <a load="/invoices" class="block mb-1">Invoices</a>
+            <ul class="ml-5">
+                <li><a load="/invoices/create-invoice">New Invoice</a></li>
+            </ul>
+        </li>
+        <li>
+            <a load="/clients">Clients</a>
+            <ul class="ml-5">
+                <li><a load="/clients/create-client">New Client</a></li>
+            </ul>
+        </li>
+        <li>
+            <a load="/contacts">Contacts</a>
+            <ul class="ml-5">
+                <li><a load="/contacts/create-contact">New Contact</a></li>
+            </ul>
+        </li>
     </ul>
-    <div class="dropdown">
-      <a href="#" class="flex items-center justify-center p-3" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
-      </a>
-      <ul class="dropdown-menu shadow" aria-labelledby="dropdownUser3">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-      </ul>
-    </div>
-  </div>
+
+</nav>

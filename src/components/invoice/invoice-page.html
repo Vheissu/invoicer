@@ -1,5 +1,34 @@
 <h1>Invoice</h1>
 
-<div>
-    
+<div class="client-details mb-5">
+    <p class="mb-2"><strong>Client: </strong> ${client.name}</p>
+    <p><strong>Address:</strong></p>
+    <p>${client.address_line_1}</p>
+    <p>${client.address_line_2}, ${client.country}</p>
+</div>
+
+
+<div class="items max-w-2xl">
+    <h3 class="font-bold text-3xl mb-3">Items</h3>
+
+    <div class="item-rows">
+        <table class="min-w-full text-left">
+            <thead>
+                <tr class="font-bold">
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Description</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Quantity</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Price</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr repeat.for="amount of amounts">
+                    <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm font-medium text-gray-900">${amount.description}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.qty}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount * amount.qty | currency}</td>
+            </tbody>
+        </table>
+    </div>
 </div>

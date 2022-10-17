@@ -11,9 +11,11 @@ export class InvoicePage implements IRouteableComponent {
 
     async loading(params: { invoiceId: number }) {
         this.invoice = await this.dataService.getInvoiceById(params.invoiceId);
-        this.client = await this.dataService.getClientById(this.invoice.clientId);
+        this.client = await this.dataService.getClientById(this.invoice.client);
         this.amounts = await this.dataService.getInvoiceAmounts(params.invoiceId);
 
-        console.log(this.amounts);
+        console.log(`Invoice`, this.invoice);
+        console.log(`Client`, this.client);
+        console.log(`Amounts`, this.amounts);
     }
 }

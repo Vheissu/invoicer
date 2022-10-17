@@ -19,7 +19,7 @@ export class MyApp implements IRouteableComponent {
       component: () => import('./components/invoices/invoices-page'),
     },
     {
-      path: 'create-invoice',
+      path: 'invoices/create-invoice',
       title: 'Create Invoice',
       component: () => import('./components/create-invoice/create-invoice'),
     },
