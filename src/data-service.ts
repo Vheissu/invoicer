@@ -30,7 +30,7 @@ export class DataService {
         this.db.version(1).stores({
             invoices: `++id, client, currency, created, date, status`,
             invoice_amounts: `++id, invoiceId, amount, qty, tax, discount, description`,
-            contacts: `++id, name, email, address_line_1, address_line_2, city, country, postcode, phone`,
+            contacts: `++id, clientId, name, email, address_line_1, address_line_2, city, country, postcode, phone`,
             clients: `++id, name, address_line_1, address_line_2, city, country, postcode, email, phone`,
         });
     }
@@ -67,12 +67,20 @@ export class DataService {
         return await this.db.invoices.toArray();
     }
 
+    async getClients() {
+        return await this.db.clients.toArray();
+    }
+
     async getInvoiceAmounts(id) {
         return await this.db.invoice_amounts.where('invoiceId').equals(parseInt(id)).toArray();
     }
 
     async getContacts() {
         return await this.db.contacts.toArray();
+    }
+
+    async getContactsByClientId(clientId) {
+        return await this.db.contacts.where('clientId').equals(parseInt(clientId)).toArray();
     }
 
     async getInvoiceById(id) {
@@ -109,6 +117,7 @@ export class DataService {
             });
 
             await this.db.contacts.add({
+                clientId: 1,
                 name: 'John Doe',
                 email: 'johndoe@gmail.com', 
                 phone: '+1-555-555-5555'

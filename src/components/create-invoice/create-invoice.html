@@ -1,1 +1,38 @@
-<h1>Invoices</h1>
+<div class="client-details mb-5">
+    <p class="mb-2"><strong>Client: </strong> <select value.bind="selectedClient"><option value=""></option><option value="${client.id}" repeat.for="client of clients">${client.name}</option></select></p>
+    <p if.bind="contacts.length"><strong>Contact: </strong> <select value.bind="selectedContact"><option value=""></option><option value="${contact.id}" repeat.for="contact of contacts">${contact.name}</option></select></p>
+</div>
+
+
+<div class="items max-w-2xl">
+    <h3 class="font-bold text-3xl mb-3">Items</h3>
+
+    <div class="item-rows">
+        <table class="min-w-full text-left align-top table-fixed break-words w-full">
+            <thead>
+                <tr class="font-bold align-top">
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left w-56">Description</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Amount</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Quantity</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Total</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left"><button type="button" click.trigger="createAmountRow()">+</button></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr class="align-top" repeat.for="amount of invoice_amounts">
+                    <td class="px-6 py-4 pl-0 whitespace-normal text-sm font-medium text-gray-900 w-56 border-b-2 focus:border-b-0" contenteditable="true" spellcheck="false" textcontent.bind="amount.description"></td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0"><input type="text" value.bind="amount.amount | toNumber"></td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0"><input type="number" value.bind="amount.qty | toNumber"></td>
+                    <td colspan="2" class="text-sm text-gray-900 font-light px-6 py-4 pl-0">${amount.amount * amount.qty | currency}</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-lg font-medium text-gray-900 px-6 py-4 pl-0">Total quantity: ${invoice_amounts.reduce((acc, amount) => acc + amount.qty, 0)}<br>Total amount: ${invoice_amounts.reduce((acc, amount) => acc + (amount.amount * amount.qty), 0) | currency}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

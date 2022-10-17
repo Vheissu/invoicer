@@ -16,8 +16,8 @@
             <thead>
                 <tr class="font-bold">
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Description</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Amount</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Quantity</th>
-                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Price</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Total</th>
                 </tr>
             </thead>
@@ -25,9 +25,10 @@
             <tbody>
                 <tr repeat.for="amount of amounts">
                     <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm font-medium text-gray-900">${amount.description}</td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount | currency}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.qty}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount * amount.qty | currency}</td>
+                </tr>
             </tbody>
         </table>
     </div>

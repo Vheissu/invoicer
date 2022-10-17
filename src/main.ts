@@ -2,10 +2,12 @@ import { CurrencyValueConverter } from './resources/value-converters/currency-co
 import { RouterConfiguration } from '@aurelia/router';
 import Aurelia from 'aurelia';
 import { MyApp } from './my-app';
+import { ToNumber } from './resources/value-converters/to-number';
 
 Aurelia.register(
     RouterConfiguration.customize({ useUrlFragmentHash: false }),
-    CurrencyValueConverter
+    CurrencyValueConverter,
+    ToNumber
 )
     .app(MyApp)
     .start();
