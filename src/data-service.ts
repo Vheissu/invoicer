@@ -1,98 +1,45 @@
 import { DI } from 'aurelia';
 
-import Dexie from 'dexie';
+import { AppDatabase } from './database-definitions';
+import { IInvoice, IInvoiceAmount, InvoiceStatus } from './database-interfaces';
 
 export const IDataService = DI.createInterface<IDataService>('IDataService', x => x.singleton(DataService));
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IDataService extends DataService {}
 
-interface IInvoice {
-    id?: number;
-    client: string;
-    currency: string;
-    created: Date;
-    date: Date;
-}
-
-enum InvoiceStatus {
-    Pending = 'pending',
-    Paid = 'paid',
-    Cancelled = 'cancelled',
-    Refunded = 'refunded'
-}
-
 export class DataService {
-    protected db;
+    protected db: AppDatabase;
 
     constructor() {
-        this.db = new Dexie('freeinvoice');
-
-        this.db.version(1).stores({
-            invoices: `++id, client, currency, created, date, status`,
-            invoice_amounts: `++id, invoiceId, amount, qty, tax, discount, description`,
-            contacts: `++id, clientId, name, email, address_line_1, address_line_2, city, country, postcode, phone`,
-            clients: `++id, name, address_line_1, address_line_2, city, country, postcode, email, phone`,
-        });
+        this.db = new AppDatabase();
     }
 
     async addInvoice(invoice: IInvoice) {
         return await this.db.invoices.add(invoice);
     }
 
-    async addContact(contact: unknown) {
-        return await this.db.contacts.add(contact);
-    }
-
     async updateInvoice(id: string, invoice: IInvoice) {
         return await this.db.invoices.update(parseInt(id), invoice);
-    }
-
-    async updateContact(id: string, contact: unknown) {
-        return await this.db.contacts.update(parseInt(id), contact);
     }
 
     async updateInvoiceStatus(id: string, status: InvoiceStatus) {
         return await this.db.invoices.update(parseInt(id), { status });
     }
 
-    async deleteInvoice(id) {
+    async deleteInvoice(id: string) {
         return await this.db.invoices.delete(parseInt(id));
     }
 
-    async deleteContact(id) {
-        return await this.db.contacts.delete(parseInt(id));
-    }
-
-    async getInvoices() {
+    async getInvoices(): Promise<IInvoice[]> {
         return await this.db.invoices.toArray();
     }
 
-    async getClients() {
-        return await this.db.clients.toArray();
-    }
-
-    async getInvoiceAmounts(id) {
+    async getInvoiceAmounts(id: string): Promise<IInvoiceAmount[]> {
         return await this.db.invoice_amounts.where('invoiceId').equals(parseInt(id)).toArray();
-    }
-
-    async getContacts() {
-        return await this.db.contacts.toArray();
-    }
-
-    async getContactsByClientId(clientId) {
-        return await this.db.contacts.where('clientId').equals(parseInt(clientId)).toArray();
     }
 
     async getInvoiceById(id) {
         return await this.db.invoices.get(parseInt(id));
-    }
-
-    async getContactById(id) {
-        return await this.db.contacts.get(parseInt(id));
-    }
-
-    async getClientById(id) {
-        return await this.db.clients.get(parseInt(id));
     }
 
     async getInvoiceDateRange(startDate, endDate) {
@@ -104,31 +51,51 @@ export class DataService {
     }
 
     async populateDb() {
-        try {
-            await this.db.clients.add({
-                name: 'ACME Corporation',
-                address_line_1: '123 Main Street',
-                address_line_2: 'Suite 100',
-                city: 'Anytown',
-                country: 'USA',
-                postcode: '12345',
-                email: 'acmecorp@acmecorp.com',
-                phone: '123-456-7890',
-            });
-
-            await this.db.contacts.add({
-                clientId: 1,
-                name: 'John Doe',
-                email: 'johndoe@gmail.com', 
-                phone: '+1-555-555-5555'
-            });
-    
+        try {    
             await this.db.invoices.add({
-                client: 1,
+                invoicee_name: 'John Doe',
+                invoicee_address_line_1: '123 Main Street',
+                invoicee_address_line_2: 'Apt 1',
+                invoicee_city: 'New York',
+                invoicee_country: 'USA',
+                invoicee_postcode: '10001',
+                invoicee_phone: '555-555-5555',
+                invoicee_email: 'johndone@somecorp.com',
+                invoicer_name: 'Some Corp',
+                invoicer_address_line_1: '123 Main Street',
+                invoicer_address_line_2: 'Apt 1',
+                invoicer_city: 'New York',
+                invoicer_country: 'USA',
+                invoicer_postcode: '10001',
+                invoicer_phone: '555-555-5555',
+                invoicer_email: 'admin@somecorp.com',
                 currency: 'USD',
                 created: new Date(),
                 date: new Date(new Date().setMonth(new Date().getMonth() + 1)),
                 status: InvoiceStatus.Pending
+            });
+
+            await this.db.invoices.add({
+                invoicee_name: 'Jane Doe',
+                invoicee_address_line_1: '234 Main Street',
+                invoicee_address_line_2: 'Suite 2',
+                invoicee_city: 'California',
+                invoicee_country: 'USA',
+                invoicee_postcode: '90210',
+                invoicee_phone: '555-555-5555',
+                invoicee_email: 'janedoe@fakecorp.com',
+                invoicer_name: 'Some Corp',
+                invoicer_address_line_1: '123 Main Street',
+                invoicer_address_line_2: 'Apt 1',
+                invoicer_city: 'New York',
+                invoicer_country: 'USA',
+                invoicer_postcode: '10001',
+                invoicer_phone: '555-555-5555',
+                invoicer_email: 'admin@somecorp.com',
+                currency: 'USD',
+                created: new Date(),
+                date: new Date(new Date().setMonth(new Date().getMonth() + 3)),
+                status: InvoiceStatus.Draft
             });
     
             await this.db.invoice_amounts.add({

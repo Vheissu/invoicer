@@ -24,11 +24,6 @@ export class MyApp implements IRouteableComponent {
       component: () => import('./components/create-invoice/create-invoice'),
     },
     {
-      path: 'contacts',
-      title: 'Contacts',
-      component: () => import('./components/contacts/contacts-page'),
-    },
-    {
       path: 'settings',
       title: 'Settings',
       component: () => import('./components/settings/settings-page'),
