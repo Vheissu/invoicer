@@ -16,6 +16,29 @@ app-sidebar {
 }
 
 
-[contenteditable]:focus {
+/* [contenteditable]:focus {
     outline: 0;
+} */
+
+[contenteditable]:empty::before {
+    content: attr(data-placeholder);
+    color: #999;
+}
+
+@layer components {
+    .btn {
+        @apply bg-contain bg-transparent bg-center bg-no-repeat;
+        height: 20px;
+        width: 20px;
+    }
+
+    .preview-btn {
+        @apply btn;
+        background-image: url('./images/preview-icon.svg');
+    }
+
+    .edit-btn {
+        @apply btn;
+        background-image: url('./images/edit-icon.svg');
+    }
 }

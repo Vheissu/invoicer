@@ -1,12 +1,20 @@
 import { IRouteableComponent } from '@aurelia/router';
-import { IHydratedController } from '@aurelia/runtime-html';
-import { LifecycleFlags } from 'aurelia';
 import { IDataService } from '../../data-service';
-import { watch } from '@aurelia/runtime-html';
 
 export class CreateInvoice implements IRouteableComponent {
     private invoice = {
-        clientName: '',
+        invoicee_name: '',
+        invoicee_address_line_1: '',
+        invoicee_address_line_2: '',
+        invoicee_city: '',
+        invoicee_country: '',
+        invoicee_postcode: '',
+        invoicer_name: '',
+        invoicer_address_line_1: '',
+        invoicer_address_line_2: '',
+        invoicer_city: '',
+        invoicer_country: '',
+        invoicer_postcode: '',
         paymentStatus: 'pending',
         currency: 'USD',
         due: new Date(),
@@ -14,16 +22,8 @@ export class CreateInvoice implements IRouteableComponent {
     };
 
     private invoice_amounts = [];
-    private clients = [];
-    private contacts = [];
-    private selectedClient = '';
 
     constructor(@IDataService private dataService: IDataService) {
-    }
-
-    async bound() {
-        this.clients = await this.dataService.getClients();
-        console.log(this.clients);
     }
 
     public createAmountRow() {
@@ -33,10 +33,5 @@ export class CreateInvoice implements IRouteableComponent {
             qty: 0,
             invoice: null,
         });
-    }
-
-    @watch('selectedClient')
-    async selectedClientChanged(newVal) {
-        this.contacts = await this.dataService.getContactsByClientId(newVal);
     }
 }

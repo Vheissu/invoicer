@@ -1,7 +1,25 @@
-<div class="client-details mb-5">
-    <p class="mb-2"><strong>Client: </strong> <select value.bind="selectedClient"><option value=""></option><option value="${client.id}" repeat.for="client of clients">${client.name}</option></select></p>
-    <p if.bind="contacts.length"><strong>Contact: </strong> <select value.bind="selectedContact"><option value=""></option><option value="${contact.id}" repeat.for="contact of contacts">${contact.name}</option></select></p>
+<div class="to-and-from mb-8 flex justify-between max-w-2xl">
+
+    <div class="invoice-to basis-6/12">
+        <p class="mb-2"><strong>To:</strong></p>
+        <p><input type="text" value.bind="invoice.invoicee_name" placeholder="Name"></p>
+        <p><input type="text" value.bind="invoice.invoicee_address_line_1" placeholder="Address (line 1)"></p>
+        <p><input type="text" value.bind="invoice.invoicee_address_line_2" placeholder="Address (line 2)"></p>
+        <p><span contenteditable="true" spellcheck="false" value.bind="invoice.invoicee_city" data-placeholder="City"></span>, <input type="text" value.bind="invoice.invoicee_country" placeholder="Country"></p>
+        <p><input type="text" value.bind="invoice.invoicee_postcode" placeholder="Postcode"></p>
+    </div>
+
+    <div class="invoice-from basis-6/12">
+        <p class="mb-2"><strong>From:</strong></p>
+        <p><input type="text" value.bind="invoice.invoicer_name" placeholder="Name"></p>
+        <p><input type="text" value.bind="invoice.invoicer_address_line_1" placeholder="Address (line 1)"></p>
+        <p><input type="text" value.bind="invoice.invoicer_address_line_2" placeholder="Address (line 2)"></p>
+        <p><span contenteditable="true" spellcheck="false" value.bind="invoice.invoicer_city" data-placeholder="City"></span>, <input type="text" value.bind="invoice.invoicer_country" placeholder="Country"></p>
+        <p><input type="text" value.bind="invoice.invoicer_postcode" placeholder="Postcode"></p>
+    </div>
+
 </div>
+
 
 
 <div class="items max-w-2xl">

@@ -1,10 +1,23 @@
-<h1>Invoice</h1>
+<div class="to-and-from mb-8 flex max-w-2xl">
 
-<div class="client-details mb-5">
-    <p class="mb-2"><strong>Client: </strong> ${client.name}</p>
-    <p><strong>Address:</strong></p>
-    <p>${client.address_line_1}</p>
-    <p>${client.address_line_2}, ${client.country}</p>
+    <div class="invoice-to">
+        <p class="mb-2"><strong>To:</strong></p>
+        <p>${invoice.invoicee_name}</p>
+        <p>${invoice.invoicee_address_line_1}</p>
+        <p>${invoice.invoicee_address_line_2}</p>
+        <p>${invoice.invoicee_city}, ${invoice.invoicee_country}</p>
+        <p>${invoice.invoicee_postcode}</p>
+    </div>
+
+    <div class="invoice-from ml-auto">
+        <p class="mb-2"><strong>From:</strong></p>
+        <p>${invoice.invoicer_name}</p>
+        <p>${invoice.invoicer_address_line_1}</p>
+        <p>${invoice.invoicer_address_line_2}</p>
+        <p>${invoice.invoicer_city}, ${invoice.invoicer_country}</p>
+        <p>${invoice.invoicer_postcode}</p>
+    </div>
+
 </div>
 
 
