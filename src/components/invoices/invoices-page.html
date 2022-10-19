@@ -19,7 +19,7 @@
             <td>${invoice.date | date}</td>
             <td>${invoice.invoicee_name}</td>
             <td>${invoice.amounts.reduce((acc, amount) => acc + (amount.amount * amount.qty), 0) | currency}</td>
-            <td><button type="button" class="preview-btn" title="View invoice" load="/invoice/${invoice.id}"></button></td>
+            <td><button type="button" class="preview-btn" title="View invoice" load="/invoice/${invoice.id}"></button> <button type="button" class="delete-btn" click.trigger="deleteInvoice(invoice.id)">X</button></td>
         </tr>
     </tbody>
 </table>

@@ -34,6 +34,17 @@ export class DataService {
         return await this.db.invoices.toArray();
     }
 
+    async addInvoiceAmount(invoiceId, amount, qty, tax, discount, description) {
+        return await this.db.invoice_amounts.add({
+            invoiceId,
+            amount,
+            qty,
+            tax,
+            discount,
+            description
+        });
+    }
+
     async getInvoiceAmounts(id: string): Promise<IInvoiceAmount[]> {
         return await this.db.invoice_amounts.where('invoiceId').equals(parseInt(id)).toArray();
     }

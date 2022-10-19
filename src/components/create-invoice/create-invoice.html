@@ -5,7 +5,7 @@
         <p><input type="text" value.bind="invoice.invoicee_name" placeholder="Name"></p>
         <p><input type="text" value.bind="invoice.invoicee_address_line_1" placeholder="Address (line 1)"></p>
         <p><input type="text" value.bind="invoice.invoicee_address_line_2" placeholder="Address (line 2)"></p>
-        <p><span contenteditable="true" spellcheck="false" value.bind="invoice.invoicee_city" data-placeholder="City"></span>, <input type="text" value.bind="invoice.invoicee_country" placeholder="Country"></p>
+        <p><span contenteditable="true" spellcheck="false" textcontent.bind="invoice.invoicee_city" data-placeholder="City"></span>, <input type="text" value.bind="invoice.invoicee_country" placeholder="Country"></p>
         <p><input type="text" value.bind="invoice.invoicee_postcode" placeholder="Postcode"></p>
     </div>
 
@@ -14,7 +14,7 @@
         <p><input type="text" value.bind="invoice.invoicer_name" placeholder="Name"></p>
         <p><input type="text" value.bind="invoice.invoicer_address_line_1" placeholder="Address (line 1)"></p>
         <p><input type="text" value.bind="invoice.invoicer_address_line_2" placeholder="Address (line 2)"></p>
-        <p><span contenteditable="true" spellcheck="false" value.bind="invoice.invoicer_city" data-placeholder="City"></span>, <input type="text" value.bind="invoice.invoicer_country" placeholder="Country"></p>
+        <p><span contenteditable="true" spellcheck="false" textcontent.bind="invoice.invoicer_city" data-placeholder="City"></span>, <input type="text" value.bind="invoice.invoicer_country" placeholder="Country"></p>
         <p><input type="text" value.bind="invoice.invoicer_postcode" placeholder="Postcode"></p>
     </div>
 
@@ -32,16 +32,20 @@
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left w-56">Description</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Amount</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Quantity</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Tax %</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Discount</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Total</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left"><button type="button" click.trigger="createAmountRow()">+</button></th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr class="align-top" repeat.for="amount of invoice_amounts">
-                    <td class="px-6 py-4 pl-0 whitespace-normal text-sm font-medium text-gray-900 w-56 border-b-2 focus:border-b-0" contenteditable="true" spellcheck="false" textcontent.bind="amount.description"></td>
+                <tr class="align-top border-b-[1px]" repeat.for="amount of invoice_amounts">
+                    <td class="px-6 py-4 pl-0 whitespace-normal text-sm font-medium text-gray-900 w-56" contenteditable="true" spellcheck="false" textcontent.bind="amount.description"></td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0"><input type="text" value.bind="amount.amount | toNumber"></td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0"><input type="number" value.bind="amount.qty | toNumber"></td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0"><input type="number" value.bind="amount.tax | toNumber"></td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0"><input type="number" value.bind="amount.discount | toNumber"></td>
                     <td colspan="2" class="text-sm text-gray-900 font-light px-6 py-4 pl-0">${amount.amount * amount.qty | currency}</td>
                 </tr>
             </tbody>
@@ -52,5 +56,9 @@
                 </tr>
             </tfoot>
         </table>
+    </div>
+
+    <div class="buttons">
+        <button type="button" click.trigger="save()">Save</button>
     </div>
 </div>

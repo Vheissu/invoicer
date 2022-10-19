@@ -1,6 +1,6 @@
-<div class="to-and-from mb-8 flex max-w-2xl">
+<div class="to-and-from mb-8 flex justify-between max-w-2xl">
 
-    <div class="invoice-to">
+    <div class="invoice-to basis-6/12">
         <p class="mb-2"><strong>To:</strong></p>
         <p>${invoice.invoicee_name}</p>
         <p>${invoice.invoicee_address_line_1}</p>
@@ -9,7 +9,7 @@
         <p>${invoice.invoicee_postcode}</p>
     </div>
 
-    <div class="invoice-from ml-auto">
+    <div class="invoice-from basis-6/12">
         <p class="mb-2"><strong>From:</strong></p>
         <p>${invoice.invoicer_name}</p>
         <p>${invoice.invoicer_address_line_1}</p>
@@ -31,6 +31,8 @@
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Description</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Amount</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Quantity</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Tax %</th>
+                    <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Discount</th>
                     <th class="text-lg font-medium text-gray-900 px-6 py-4 pl-0 text-left">Total</th>
                 </tr>
             </thead>
@@ -40,7 +42,9 @@
                     <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm font-medium text-gray-900">${amount.description}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount | currency}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.qty}</td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount * amount.qty | currency}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.tax}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.discount}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 pl-0 whitespace-nowrap">${amount.amount * amount.qty - amount.discount | currency}</td>
                 </tr>
             </tbody>
         </table>

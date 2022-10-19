@@ -13,4 +13,10 @@ export class InvoicesPage {
             invoice.amounts = await this.dataService.getInvoiceAmounts(invoice.id as unknown as string);
         }
     }
+
+    async deleteInvoice(id: string) {
+        await this.dataService.deleteInvoice(id);
+
+        this.invoices.splice(this.invoices.findIndex(invoice => invoice.id === parseInt(id)), 1);
+    }
 }
