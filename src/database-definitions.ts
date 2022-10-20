@@ -11,7 +11,7 @@ export class AppDatabase extends Dexie {
         this.version(1).stores({
             invoices: `
                 ++id, 
-                client, 
+                client,
                 invoicee_name, 
                 invoicee_email, 
                 invoicee_address_line_1, 
@@ -28,6 +28,8 @@ export class AppDatabase extends Dexie {
                 invoicer_country,
                 invoicer_postcode,
                 invoicer_phone,
+                invoice_number,
+                invoice_notes,
                 currency, 
                 created, 
                 date, 

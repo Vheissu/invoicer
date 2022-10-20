@@ -16,6 +16,8 @@ export interface IInvoice {
     invoicer_country: string;
     invoicer_postcode: string;
     invoicer_phone?: string;
+    invoice_number?: string;
+    invoice_notes?: string;
     currency: string;
     created: Date;
     date: Date;

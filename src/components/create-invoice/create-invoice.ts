@@ -1,6 +1,6 @@
 import { IRouteableComponent } from '@aurelia/router';
 import { IDataService } from '../../data-service';
-import { InvoiceStatus } from '../../database-interfaces';
+import { IInvoiceAmount, InvoiceStatus } from '../../database-interfaces';
 
 export class CreateInvoice implements IRouteableComponent {
     private invoice = {
@@ -36,6 +36,8 @@ export class CreateInvoice implements IRouteableComponent {
             description: '',
             amount: 0,
             qty: 0,
+            tax: 0,
+            discount: 0,
             invoice: null,
         });
     }
@@ -48,5 +50,21 @@ export class CreateInvoice implements IRouteableComponent {
         }
 
         console.log(invoice);
+    }
+
+    public calculateAmount(amount: string, qty: string, tax: string, discount: string) {
+        const calculated = parseFloat(amount) * parseFloat(qty) - parseFloat(discount);
+        const taxAmount = (calculated / 100) * parseFloat(tax);
+        const total = calculated + taxAmount;
+
+        return !isNaN(total) ? total : 0;
+    }
+
+    public currencyCheck(e) {
+        if (e.target.value.trim() === '') {
+            e.target.value = 0;
+        }
+
+        return true;
     }
 }

@@ -3,18 +3,16 @@
 @tailwind utilities;
 
 .logo {
-
 }
 
 app-sidebar {
-    background: #1E1E1E;
-    color: #FFF;
+    background: #1e1e1e;
+    color: #fff;
 }
 
 .menu .active {
     @apply font-bold;
 }
-
 
 /* [contenteditable]:focus {
     outline: 0;
@@ -34,11 +32,11 @@ app-sidebar {
 
     .preview-btn {
         @apply btn;
-        background-image: url('./images/preview-icon.svg');
+        background-image: url("./images/preview-icon.svg");
     }
 
     .edit-btn {
         @apply btn;
-        background-image: url('./images/edit-icon.svg');
+        background-image: url("./images/edit-icon.svg");
     }
 }
